@@ -1,0 +1,700 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 화요일-11월-12-2019   
+--------------------------------------------------------
+DROP TABLE "ATTACHMENT";
+DROP TABLE "BASKET";
+DROP TABLE "BROADCAST";
+DROP TABLE "CINEMA";
+DROP TABLE "COUNTER";
+DROP TABLE "EVENT";
+DROP TABLE "MBASCKET";
+DROP TABLE "MEMBER";
+DROP TABLE "MOVIE";
+DROP TABLE "MREVIEW";
+DROP TABLE "OVO";
+DROP TABLE "PAYMENT";
+DROP TABLE "PREVIEW";
+DROP TABLE "REPLY";
+DROP TABLE "REPORT";
+DROP TABLE "SERVICE";
+DROP TABLE "SKBASKET";
+DROP TABLE "SNACK";
+DROP TABLE "TICKET";
+--------------------------------------------------------
+--  DDL for Table ATTACHMENT
+--------------------------------------------------------
+
+  CREATE TABLE "ATTACHMENT" 
+   (	"FID" VARCHAR2(20 BYTE), 
+	"MCODE" VARCHAR2(20 BYTE), 
+	"ORIGIN_NAME" VARCHAR2(4000 BYTE), 
+	"CHANGE_NAME" VARCHAR2(4000 BYTE), 
+	"FILE_PATH" VARCHAR2(4000 BYTE), 
+	"FILE_LEVEL" VARCHAR2(50 BYTE), 
+	"UPLOAD_DATE" DATE, 
+	"STATUS" VARCHAR2(5 BYTE) DEFAULT 'N'
+   ) ;
+--------------------------------------------------------
+--  DDL for Table BASKET
+--------------------------------------------------------
+
+  CREATE TABLE "BASKET" 
+   (	"BSCODE" VARCHAR2(50 BYTE), 
+	"SBSCODE" VARCHAR2(50 BYTE), 
+	"MBSCODE" VARCHAR2(50 BYTE), 
+	"USER_ID" VARCHAR2(20 BYTE)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table BROADCAST
+--------------------------------------------------------
+
+  CREATE TABLE "BROADCAST" 
+   (	"BCODE" VARCHAR2(50 BYTE), 
+	"MCODE" VARCHAR2(50 BYTE), 
+	"CCODE" VARCHAR2(50 BYTE), 
+	"BDATE" DATE, 
+	"SEAT" VARCHAR2(1000 BYTE)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table CINEMA
+--------------------------------------------------------
+
+  CREATE TABLE "CINEMA" 
+   (	"CCODE" VARCHAR2(50 BYTE), 
+	"CNAME" VARCHAR2(50 BYTE), 
+	"CADR" VARCHAR2(100 BYTE)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table COUNTER
+--------------------------------------------------------
+
+  CREATE TABLE "COUNTER" 
+   (	"CNUM" VARCHAR2(20 BYTE), 
+	"USER_ID" VARCHAR2(20 BYTE), 
+	"C_DATE" DATE DEFAULT SYSDATE
+   ) ;
+--------------------------------------------------------
+--  DDL for Table EVENT
+--------------------------------------------------------
+
+  CREATE TABLE "EVENT" 
+   (	"ECODE" VARCHAR2(50 BYTE), 
+	"DISCOUNT" VARCHAR2(10 BYTE)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table MBASCKET
+--------------------------------------------------------
+
+  CREATE TABLE "MBASCKET" 
+   (	"MBSCODE" VARCHAR2(50 BYTE), 
+	"TNUM" VARCHAR2(50 BYTE), 
+	"TPAGE" VARCHAR2(5 BYTE), 
+	"USER_ID" VARCHAR2(20 BYTE)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table MEMBER
+--------------------------------------------------------
+
+  CREATE TABLE "MEMBER" 
+   (	"USER_ID" VARCHAR2(50 BYTE), 
+	"USER_PW" VARCHAR2(50 BYTE), 
+	"PW_HINT" VARCHAR2(50 BYTE), 
+	"HINT" VARCHAR2(50 BYTE), 
+	"USER_NAME" VARCHAR2(50 BYTE), 
+	"GENDER" VARCHAR2(50 BYTE), 
+	"BIRTH" DATE, 
+	"PHONE" VARCHAR2(50 BYTE), 
+	"EMAIL" VARCHAR2(50 BYTE), 
+	"ADDRESS" VARCHAR2(50 BYTE), 
+	"FAVORITE" VARCHAR2(50 BYTE), 
+	"MVP" VARCHAR2(5 BYTE), 
+	"BREAKDOWN" VARCHAR2(100 BYTE), 
+	"STATUS" VARCHAR2(5 BYTE) DEFAULT 'N', 
+	"PUNISH" DATE
+   ) ;
+--------------------------------------------------------
+--  DDL for Table MOVIE
+--------------------------------------------------------
+
+  CREATE TABLE "MOVIE" 
+   (	"MCODE" VARCHAR2(50 BYTE), 
+	"MTITLE" VARCHAR2(50 BYTE), 
+	"MTITLEENG" VARCHAR2(300 BYTE), 
+	"MTITLEPLOT" VARCHAR2(2000 BYTE), 
+	"PLOT" VARCHAR2(4000 BYTE), 
+	"CATEGORY" VARCHAR2(100 BYTE), 
+	"MDIRECTOR" VARCHAR2(2000 BYTE), 
+	"MACTOR" VARCHAR2(500 BYTE), 
+	"KINDS" VARCHAR2(50 BYTE), 
+	"INFO" VARCHAR2(500 BYTE), 
+	"RELEASE" DATE DEFAULT sysdate, 
+	"AGECUT" VARCHAR2(5 BYTE), 
+	"COUNT" NUMBER DEFAULT 0, 
+	"STATUS" VARCHAR2(5 BYTE) DEFAULT 'N'
+   ) ;
+--------------------------------------------------------
+--  DDL for Table MREVIEW
+--------------------------------------------------------
+
+  CREATE TABLE "MREVIEW" 
+   (	"RNUM" VARCHAR2(50 BYTE), 
+	"MCODE" VARCHAR2(50 BYTE), 
+	"RTITLE" VARCHAR2(50 BYTE), 
+	"RWRITER" VARCHAR2(50 BYTE), 
+	"RCONTENT" VARCHAR2(500 BYTE), 
+	"RRATE" VARCHAR2(5 BYTE) DEFAULT 5, 
+	"CHARMINGPOINT" VARCHAR2(5 BYTE) DEFAULT 0, 
+	"DIRECTOR_PRODUCTION" VARCHAR2(5 BYTE) DEFAULT 0, 
+	"OST" VARCHAR2(5 BYTE) DEFAULT 0, 
+	"ACTOR_ACTING" VARCHAR2(5 BYTE) DEFAULT 0, 
+	"STORY" VARCHAR2(5 BYTE) DEFAULT 0, 
+	"MOVIE_BEAUTY" VARCHAR2(5 BYTE) DEFAULT 0, 
+	"MRVDATE" DATE DEFAULT SYSDATE, 
+	"STATUS" VARCHAR2(5 BYTE) DEFAULT 'N'
+   ) ;
+--------------------------------------------------------
+--  DDL for Table OVO
+--------------------------------------------------------
+
+  CREATE TABLE "OVO" 
+   (	"ONUM" VARCHAR2(50 BYTE), 
+	"USER_ID" VARCHAR2(50 BYTE), 
+	"CATEGORY" VARCHAR2(5 BYTE), 
+	"OTITLE" VARCHAR2(50 BYTE), 
+	"OCONTENT" VARCHAR2(500 BYTE), 
+	"OANSWER" VARCHAR2(500 BYTE), 
+	"ODATE" DATE DEFAULT SYSDATE, 
+	"STATUS" VARCHAR2(5 BYTE) DEFAULT 'N'
+   ) ;
+--------------------------------------------------------
+--  DDL for Table PAYMENT
+--------------------------------------------------------
+
+  CREATE TABLE "PAYMENT" 
+   (	"PCODE" VARCHAR2(50 BYTE), 
+	"BSCODE" VARCHAR2(50 BYTE), 
+	"MONEY" VARCHAR2(10 BYTE), 
+	"PAYDAY" DATE, 
+	"DISCOUNT" VARCHAR2(5 BYTE), 
+	"STATUS" VARCHAR2(5 BYTE) DEFAULT 'N'
+   ) ;
+--------------------------------------------------------
+--  DDL for Table PREVIEW
+--------------------------------------------------------
+
+  CREATE TABLE "PREVIEW" 
+   (	"PREVIEWID" VARCHAR2(50 BYTE), 
+	"MCODE" VARCHAR2(50 BYTE), 
+	"YURL" VARCHAR2(500 BYTE), 
+	"REGISTRATIONDATE" DATE DEFAULT sysdate, 
+	"MODIFIEDDATE" DATE DEFAULT sysdate, 
+	"STATUS" VARCHAR2(5 BYTE) DEFAULT 'N'
+   ) ;
+--------------------------------------------------------
+--  DDL for Table REPLY
+--------------------------------------------------------
+
+  CREATE TABLE "REPLY" 
+   (	"RID" VARCHAR2(20 BYTE), 
+	"RNUM" VARCHAR2(20 BYTE), 
+	"MCODE" VARCHAR2(20 BYTE), 
+	"RCONTENT" VARCHAR2(500 BYTE), 
+	"RWRITER" VARCHAR2(50 BYTE), 
+	"REPLY_LEVEL" VARCHAR2(20 BYTE), 
+	"CREATE_DATE" DATE, 
+	"MODIFY_DATE" DATE, 
+	"STATUS" VARCHAR2(5 BYTE) DEFAULT 'N'
+   ) ;
+--------------------------------------------------------
+--  DDL for Table REPORT
+--------------------------------------------------------
+
+  CREATE TABLE "REPORT" 
+   (	"USER_ID" VARCHAR2(20 BYTE), 
+	"CATE" VARCHAR2(20 BYTE), 
+	"BNUM" VARCHAR2(20 BYTE), 
+	"RDATE" DATE DEFAULT SYSDATE
+   ) ;
+--------------------------------------------------------
+--  DDL for Table SERVICE
+--------------------------------------------------------
+
+  CREATE TABLE "SERVICE" 
+   (	"SNUM" VARCHAR2(50 BYTE), 
+	"USER_ID" VARCHAR2(50 BYTE), 
+	"STITLE" VARCHAR2(50 BYTE), 
+	"SCONTENT" VARCHAR2(500 BYTE), 
+	"SANSWER" VARCHAR2(500 BYTE), 
+	"SDATE" DATE DEFAULT SYSDATE, 
+	"STATUS" VARCHAR2(5 BYTE) DEFAULT 'N'
+   ) ;
+--------------------------------------------------------
+--  DDL for Table SKBASKET
+--------------------------------------------------------
+
+  CREATE TABLE "SKBASKET" 
+   (	"SBSCODE" VARCHAR2(50 BYTE), 
+	"SKCODE" VARCHAR2(50 BYTE), 
+	"SKQUANTITY" VARCHAR2(10 BYTE), 
+	"USER_ID" VARCHAR2(20 BYTE)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table SNACK
+--------------------------------------------------------
+
+  CREATE TABLE "SNACK" 
+   (	"SKCODE" VARCHAR2(50 BYTE), 
+	"CCODE" VARCHAR2(50 BYTE), 
+	"SKNAME" VARCHAR2(100 BYTE), 
+	"PRICE" VARCHAR2(50 BYTE), 
+	"SKCONTENT" VARCHAR2(200 BYTE), 
+	"KINDS" VARCHAR2(10 BYTE), 
+	"PICTURE" VARCHAR2(1000 BYTE)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table TICKET
+--------------------------------------------------------
+
+  CREATE TABLE "TICKET" 
+   (	"TNUM" VARCHAR2(50 BYTE), 
+	"MCODE" VARCHAR2(50 BYTE), 
+	"USER_ID" VARCHAR2(50 BYTE), 
+	"CCODE" VARCHAR2(50 BYTE), 
+	"PRICE" VARCHAR2(50 BYTE), 
+	"SEAT" VARCHAR2(1000 BYTE)
+   ) ;
+REM INSERTING into ATTACHMENT
+SET DEFINE OFF;
+Insert into ATTACHMENT (FID,MCODE,ORIGIN_NAME,CHANGE_NAME,FILE_PATH,FILE_LEVEL,UPLOAD_DATE,STATUS) values ('210','87','Max2019weathersboy3.jpg','2019111114480174810.jpg','C:\영화비교분석\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\kh-SemiProject-T.M.I2\/resources/MovieImg_upload/','0',to_date('19/11/11','RR/MM/DD'),'N');
+Insert into ATTACHMENT (FID,MCODE,ORIGIN_NAME,CHANGE_NAME,FILE_PATH,FILE_LEVEL,UPLOAD_DATE,STATUS) values ('211','87','Max2019weathersboy_p10.jpg','2019111114480122901.jpg','C:\영화비교분석\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\kh-SemiProject-T.M.I2\/resources/MovieImg_upload/','1',to_date('19/11/11','RR/MM/DD'),'N');
+Insert into ATTACHMENT (FID,MCODE,ORIGIN_NAME,CHANGE_NAME,FILE_PATH,FILE_LEVEL,UPLOAD_DATE,STATUS) values ('212','87','Max2019weathersboy_p11.jpg','2019111114480140659.jpg','C:\영화비교분석\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\kh-SemiProject-T.M.I2\/resources/MovieImg_upload/','1',to_date('19/11/11','RR/MM/DD'),'N');
+Insert into ATTACHMENT (FID,MCODE,ORIGIN_NAME,CHANGE_NAME,FILE_PATH,FILE_LEVEL,UPLOAD_DATE,STATUS) values ('213','87','Max2019weathersboy_s17.jpg','2019111114480125896.jpg','C:\영화비교분석\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\kh-SemiProject-T.M.I2\/resources/MovieImg_upload/','1',to_date('19/11/11','RR/MM/DD'),'N');
+Insert into ATTACHMENT (FID,MCODE,ORIGIN_NAME,CHANGE_NAME,FILE_PATH,FILE_LEVEL,UPLOAD_DATE,STATUS) values ('214','87','Max2019weathersboy_s16.jpg','2019111114480192732.jpg','C:\영화비교분석\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\kh-SemiProject-T.M.I2\/resources/MovieImg_upload/','1',to_date('19/11/11','RR/MM/DD'),'N');
+REM INSERTING into BASKET
+SET DEFINE OFF;
+REM INSERTING into BROADCAST
+SET DEFINE OFF;
+REM INSERTING into CINEMA
+SET DEFINE OFF;
+REM INSERTING into COUNTER
+SET DEFINE OFF;
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('94','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('95','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('96','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('97','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('98','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('99','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('100','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('101','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('102','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('103','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('104','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('105','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('106','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('107','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('108','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('109','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('111','aaaa',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('112','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('113','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('114','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('115','admin',to_date('19/11/11','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('116','admin',to_date('19/11/12','RR/MM/DD'));
+Insert into COUNTER (CNUM,USER_ID,C_DATE) values ('117','admin',to_date('19/11/12','RR/MM/DD'));
+REM INSERTING into EVENT
+SET DEFINE OFF;
+REM INSERTING into MBASCKET
+SET DEFINE OFF;
+REM INSERTING into MEMBER
+SET DEFINE OFF;
+Insert into MEMBER (USER_ID,USER_PW,PW_HINT,HINT,USER_NAME,GENDER,BIRTH,PHONE,EMAIL,ADDRESS,FAVORITE,MVP,BREAKDOWN,STATUS,PUNISH) values ('admin','123','졸업한 초등학교 이름은?','수기','강두리','남자',to_date('95/06/26','RR/MM/DD'),'01050612476','kooda21@naver.com','경기도','액션,SF / 판타지','C',null,'N',null);
+Insert into MEMBER (USER_ID,USER_PW,PW_HINT,HINT,USER_NAME,GENDER,BIRTH,PHONE,EMAIL,ADDRESS,FAVORITE,MVP,BREAKDOWN,STATUS,PUNISH) values ('aaaa','123','졸업한 초등학교 이름은?','zzz','강두리','남자',to_date('95/06/26','RR/MM/DD'),'01050612476','kooda21@naver.com','경기도 화성시','액션,드라마','C',null,'N',null);
+Insert into MEMBER (USER_ID,USER_PW,PW_HINT,HINT,USER_NAME,GENDER,BIRTH,PHONE,EMAIL,ADDRESS,FAVORITE,MVP,BREAKDOWN,STATUS,PUNISH) values ('test','123123','졸업한 초등학교 이름은?','수기','강두리','남자',to_date('19/10/30','RR/MM/DD'),'01050612476','kooda21@naver.com','경기도 화성시','액션,드라마','C',null,'N',null);
+REM INSERTING into MOVIE
+SET DEFINE OFF;
+Insert into MOVIE (MCODE,MTITLE,MTITLEENG,MTITLEPLOT,PLOT,CATEGORY,MDIRECTOR,MACTOR,KINDS,INFO,RELEASE,AGECUT,COUNT,STATUS) values ('87','터미네이터 다크 페이트','Terminator: Dark Fate','zz','zz','now_playing_movie','팀 밀러','맥켄지 데이비스','재난','128분 미국',to_date('19/10/29','RR/MM/DD'),'15s',1,'N');
+REM INSERTING into MREVIEW
+SET DEFINE OFF;
+REM INSERTING into OVO
+SET DEFINE OFF;
+REM INSERTING into PAYMENT
+SET DEFINE OFF;
+REM INSERTING into PREVIEW
+SET DEFINE OFF;
+Insert into PREVIEW (PREVIEWID,MCODE,YURL,REGISTRATIONDATE,MODIFIEDDATE,STATUS) values ('177','87','<iframe width="1195" height="672" src="https://www.youtube.com/embed/mNezVsOX9N8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',to_date('19/11/11','RR/MM/DD'),to_date('19/11/11','RR/MM/DD'),'N');
+Insert into PREVIEW (PREVIEWID,MCODE,YURL,REGISTRATIONDATE,MODIFIEDDATE,STATUS) values ('178','87','<iframe width="1280" height="720" src="https://www.youtube.com/embed/Bxx7-sPKt84" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',to_date('19/11/11','RR/MM/DD'),to_date('19/11/11','RR/MM/DD'),'N');
+Insert into PREVIEW (PREVIEWID,MCODE,YURL,REGISTRATIONDATE,MODIFIEDDATE,STATUS) values ('179','87','<iframe width="1195" height="672" src="https://www.youtube.com/embed/eE4GPPnG1Mw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',to_date('19/11/11','RR/MM/DD'),to_date('19/11/11','RR/MM/DD'),'N');
+REM INSERTING into REPLY
+SET DEFINE OFF;
+REM INSERTING into REPORT
+SET DEFINE OFF;
+Insert into REPORT (USER_ID,CATE,BNUM,RDATE) values ('admin','board','2',to_date('19/11/11','RR/MM/DD'));
+REM INSERTING into SERVICE
+SET DEFINE OFF;
+Insert into SERVICE (SNUM,USER_ID,STITLE,SCONTENT,SANSWER,SDATE,STATUS) values ('1','admin','하하','zz',null,to_date('19/11/11','RR/MM/DD'),'N');
+REM INSERTING into SKBASKET
+SET DEFINE OFF;
+REM INSERTING into SNACK
+SET DEFINE OFF;
+REM INSERTING into TICKET
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index PK_ATTACHMENT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_ATTACHMENT" ON "ATTACHMENT" ("FID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_BASKET
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_BASKET" ON "BASKET" ("BSCODE") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_BROADCAST
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_BROADCAST" ON "BROADCAST" ("BCODE") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_CINEMA
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_CINEMA" ON "CINEMA" ("CCODE") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_CNUM
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_CNUM" ON "COUNTER" ("CNUM") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_EVENT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_EVENT" ON "EVENT" ("ECODE") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_MBASCKET
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_MBASCKET" ON "MBASCKET" ("MBSCODE") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_USER
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_USER" ON "MEMBER" ("USER_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_MOVIE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_MOVIE" ON "MOVIE" ("MCODE") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_MREVIEW
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_MREVIEW" ON "MREVIEW" ("RNUM") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_OVO
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_OVO" ON "OVO" ("ONUM") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_PAYMENT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_PAYMENT" ON "PAYMENT" ("PCODE") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_PREVIEW
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_PREVIEW" ON "PREVIEW" ("PREVIEWID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_REPLY
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_REPLY" ON "REPLY" ("RID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SERVICE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_SERVICE" ON "SERVICE" ("SNUM") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SKBASKET
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_SKBASKET" ON "SKBASKET" ("SBSCODE") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_SNACK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_SNACK" ON "SNACK" ("SKCODE") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_TICKET
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_TICKET" ON "TICKET" ("TNUM") 
+  ;
+--------------------------------------------------------
+--  Constraints for Table ATTACHMENT
+--------------------------------------------------------
+
+  ALTER TABLE "ATTACHMENT" ADD CONSTRAINT "PK_ATTACHMENT" PRIMARY KEY ("FID") ENABLE;
+  ALTER TABLE "ATTACHMENT" MODIFY ("MCODE" NOT NULL ENABLE);
+  ALTER TABLE "ATTACHMENT" MODIFY ("FID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table BASKET
+--------------------------------------------------------
+
+  ALTER TABLE "BASKET" ADD CONSTRAINT "PK_BASKET" PRIMARY KEY ("BSCODE") ENABLE;
+  ALTER TABLE "BASKET" MODIFY ("MBSCODE" NOT NULL ENABLE);
+  ALTER TABLE "BASKET" MODIFY ("SBSCODE" NOT NULL ENABLE);
+  ALTER TABLE "BASKET" MODIFY ("BSCODE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table BROADCAST
+--------------------------------------------------------
+
+  ALTER TABLE "BROADCAST" ADD CONSTRAINT "PK_BROADCAST" PRIMARY KEY ("BCODE") ENABLE;
+  ALTER TABLE "BROADCAST" MODIFY ("SEAT" NOT NULL ENABLE);
+  ALTER TABLE "BROADCAST" MODIFY ("BDATE" NOT NULL ENABLE);
+  ALTER TABLE "BROADCAST" MODIFY ("CCODE" NOT NULL ENABLE);
+  ALTER TABLE "BROADCAST" MODIFY ("MCODE" NOT NULL ENABLE);
+  ALTER TABLE "BROADCAST" MODIFY ("BCODE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table CINEMA
+--------------------------------------------------------
+
+  ALTER TABLE "CINEMA" ADD CONSTRAINT "PK_CINEMA" PRIMARY KEY ("CCODE") ENABLE;
+  ALTER TABLE "CINEMA" MODIFY ("CADR" NOT NULL ENABLE);
+  ALTER TABLE "CINEMA" MODIFY ("CNAME" NOT NULL ENABLE);
+  ALTER TABLE "CINEMA" MODIFY ("CCODE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table COUNTER
+--------------------------------------------------------
+
+  ALTER TABLE "COUNTER" ADD CONSTRAINT "PK_CNUM" PRIMARY KEY ("CNUM") ENABLE;
+  ALTER TABLE "COUNTER" MODIFY ("USER_ID" NOT NULL ENABLE);
+  ALTER TABLE "COUNTER" MODIFY ("CNUM" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table EVENT
+--------------------------------------------------------
+
+  ALTER TABLE "EVENT" ADD CONSTRAINT "PK_EVENT" PRIMARY KEY ("ECODE") ENABLE;
+  ALTER TABLE "EVENT" MODIFY ("ECODE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table MBASCKET
+--------------------------------------------------------
+
+  ALTER TABLE "MBASCKET" ADD CONSTRAINT "PK_MBASCKET" PRIMARY KEY ("MBSCODE") ENABLE;
+  ALTER TABLE "MBASCKET" MODIFY ("TNUM" NOT NULL ENABLE);
+  ALTER TABLE "MBASCKET" MODIFY ("MBSCODE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table MEMBER
+--------------------------------------------------------
+
+  ALTER TABLE "MEMBER" ADD CONSTRAINT "PK_USER" PRIMARY KEY ("USER_ID") ENABLE;
+  ALTER TABLE "MEMBER" MODIFY ("EMAIL" NOT NULL ENABLE);
+  ALTER TABLE "MEMBER" MODIFY ("PHONE" NOT NULL ENABLE);
+  ALTER TABLE "MEMBER" MODIFY ("BIRTH" NOT NULL ENABLE);
+  ALTER TABLE "MEMBER" MODIFY ("GENDER" NOT NULL ENABLE);
+  ALTER TABLE "MEMBER" MODIFY ("USER_NAME" NOT NULL ENABLE);
+  ALTER TABLE "MEMBER" MODIFY ("PW_HINT" NOT NULL ENABLE);
+  ALTER TABLE "MEMBER" MODIFY ("USER_PW" NOT NULL ENABLE);
+  ALTER TABLE "MEMBER" MODIFY ("USER_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table MOVIE
+--------------------------------------------------------
+
+  ALTER TABLE "MOVIE" ADD CONSTRAINT "PK_MOVIE" PRIMARY KEY ("MCODE") ENABLE;
+  ALTER TABLE "MOVIE" MODIFY ("INFO" NOT NULL ENABLE);
+  ALTER TABLE "MOVIE" MODIFY ("KINDS" NOT NULL ENABLE);
+  ALTER TABLE "MOVIE" MODIFY ("MACTOR" NOT NULL ENABLE);
+  ALTER TABLE "MOVIE" MODIFY ("MDIRECTOR" NOT NULL ENABLE);
+  ALTER TABLE "MOVIE" MODIFY ("MTITLEPLOT" NOT NULL ENABLE);
+  ALTER TABLE "MOVIE" MODIFY ("MTITLEENG" NOT NULL ENABLE);
+  ALTER TABLE "MOVIE" MODIFY ("MTITLE" NOT NULL ENABLE);
+  ALTER TABLE "MOVIE" MODIFY ("MCODE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table MREVIEW
+--------------------------------------------------------
+
+  ALTER TABLE "MREVIEW" ADD CONSTRAINT "PK_MREVIEW" PRIMARY KEY ("RNUM") ENABLE;
+  ALTER TABLE "MREVIEW" MODIFY ("RTITLE" NOT NULL ENABLE);
+  ALTER TABLE "MREVIEW" MODIFY ("MCODE" NOT NULL ENABLE);
+  ALTER TABLE "MREVIEW" MODIFY ("RNUM" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table OVO
+--------------------------------------------------------
+
+  ALTER TABLE "OVO" ADD CONSTRAINT "PK_OVO" PRIMARY KEY ("ONUM") ENABLE;
+  ALTER TABLE "OVO" MODIFY ("OTITLE" NOT NULL ENABLE);
+  ALTER TABLE "OVO" MODIFY ("CATEGORY" NOT NULL ENABLE);
+  ALTER TABLE "OVO" MODIFY ("USER_ID" NOT NULL ENABLE);
+  ALTER TABLE "OVO" MODIFY ("ONUM" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PAYMENT
+--------------------------------------------------------
+
+  ALTER TABLE "PAYMENT" ADD CONSTRAINT "PK_PAYMENT" PRIMARY KEY ("PCODE") ENABLE;
+  ALTER TABLE "PAYMENT" MODIFY ("BSCODE" NOT NULL ENABLE);
+  ALTER TABLE "PAYMENT" MODIFY ("PCODE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PREVIEW
+--------------------------------------------------------
+
+  ALTER TABLE "PREVIEW" ADD CONSTRAINT "PK_PREVIEW" PRIMARY KEY ("PREVIEWID") ENABLE;
+  ALTER TABLE "PREVIEW" MODIFY ("YURL" NOT NULL ENABLE);
+  ALTER TABLE "PREVIEW" MODIFY ("MCODE" NOT NULL ENABLE);
+  ALTER TABLE "PREVIEW" MODIFY ("PREVIEWID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table REPLY
+--------------------------------------------------------
+
+  ALTER TABLE "REPLY" ADD CONSTRAINT "PK_REPLY" PRIMARY KEY ("RID") ENABLE;
+  ALTER TABLE "REPLY" MODIFY ("RID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table REPORT
+--------------------------------------------------------
+
+  ALTER TABLE "REPORT" MODIFY ("BNUM" NOT NULL ENABLE);
+  ALTER TABLE "REPORT" MODIFY ("CATE" NOT NULL ENABLE);
+  ALTER TABLE "REPORT" MODIFY ("USER_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SERVICE
+--------------------------------------------------------
+
+  ALTER TABLE "SERVICE" ADD CONSTRAINT "PK_SERVICE" PRIMARY KEY ("SNUM") ENABLE;
+  ALTER TABLE "SERVICE" MODIFY ("STITLE" NOT NULL ENABLE);
+  ALTER TABLE "SERVICE" MODIFY ("USER_ID" NOT NULL ENABLE);
+  ALTER TABLE "SERVICE" MODIFY ("SNUM" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SKBASKET
+--------------------------------------------------------
+
+  ALTER TABLE "SKBASKET" ADD CONSTRAINT "PK_SKBASKET" PRIMARY KEY ("SBSCODE") ENABLE;
+  ALTER TABLE "SKBASKET" MODIFY ("SKCODE" NOT NULL ENABLE);
+  ALTER TABLE "SKBASKET" MODIFY ("SBSCODE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SNACK
+--------------------------------------------------------
+
+  ALTER TABLE "SNACK" ADD CONSTRAINT "PK_SNACK" PRIMARY KEY ("SKCODE") ENABLE;
+  ALTER TABLE "SNACK" MODIFY ("KINDS" NOT NULL ENABLE);
+  ALTER TABLE "SNACK" MODIFY ("PRICE" NOT NULL ENABLE);
+  ALTER TABLE "SNACK" MODIFY ("SKNAME" NOT NULL ENABLE);
+  ALTER TABLE "SNACK" MODIFY ("CCODE" NOT NULL ENABLE);
+  ALTER TABLE "SNACK" MODIFY ("SKCODE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table TICKET
+--------------------------------------------------------
+
+  ALTER TABLE "TICKET" ADD CONSTRAINT "PK_TICKET" PRIMARY KEY ("TNUM") ENABLE;
+  ALTER TABLE "TICKET" MODIFY ("SEAT" NOT NULL ENABLE);
+  ALTER TABLE "TICKET" MODIFY ("PRICE" NOT NULL ENABLE);
+  ALTER TABLE "TICKET" MODIFY ("CCODE" NOT NULL ENABLE);
+  ALTER TABLE "TICKET" MODIFY ("USER_ID" NOT NULL ENABLE);
+  ALTER TABLE "TICKET" MODIFY ("MCODE" NOT NULL ENABLE);
+  ALTER TABLE "TICKET" MODIFY ("TNUM" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Ref Constraints for Table ATTACHMENT
+--------------------------------------------------------
+
+  ALTER TABLE "ATTACHMENT" ADD CONSTRAINT "FK_MOVIE_TO_ATTACHMENT_1" FOREIGN KEY ("MCODE")
+	  REFERENCES "MOVIE" ("MCODE") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table BASKET
+--------------------------------------------------------
+
+  ALTER TABLE "BASKET" ADD CONSTRAINT "FK_MBASCKET_TO_BASKET_1" FOREIGN KEY ("MBSCODE")
+	  REFERENCES "MBASCKET" ("MBSCODE") ENABLE;
+  ALTER TABLE "BASKET" ADD CONSTRAINT "FK_MEMBER_TO_BASKET" FOREIGN KEY ("USER_ID")
+	  REFERENCES "MEMBER" ("USER_ID") ENABLE;
+  ALTER TABLE "BASKET" ADD CONSTRAINT "FK_SKBASKET_TO_BASKET_1" FOREIGN KEY ("SBSCODE")
+	  REFERENCES "SKBASKET" ("SBSCODE") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table BROADCAST
+--------------------------------------------------------
+
+  ALTER TABLE "BROADCAST" ADD CONSTRAINT "FK_CINEMA_TO_BROADCAST_1" FOREIGN KEY ("CCODE")
+	  REFERENCES "CINEMA" ("CCODE") ENABLE;
+  ALTER TABLE "BROADCAST" ADD CONSTRAINT "FK_MOVIE_TO_BROADCAST_1" FOREIGN KEY ("MCODE")
+	  REFERENCES "MOVIE" ("MCODE") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table COUNTER
+--------------------------------------------------------
+
+  ALTER TABLE "COUNTER" ADD CONSTRAINT "FK_MEMBER_TO_COUNTER" FOREIGN KEY ("USER_ID")
+	  REFERENCES "MEMBER" ("USER_ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table MBASCKET
+--------------------------------------------------------
+
+  ALTER TABLE "MBASCKET" ADD CONSTRAINT "FK_MEMBER_TO_MBASCKET" FOREIGN KEY ("USER_ID")
+	  REFERENCES "MEMBER" ("USER_ID") ENABLE;
+  ALTER TABLE "MBASCKET" ADD CONSTRAINT "FK_TICKET_TO_MBASCKET_1" FOREIGN KEY ("TNUM")
+	  REFERENCES "TICKET" ("TNUM") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table MREVIEW
+--------------------------------------------------------
+
+  ALTER TABLE "MREVIEW" ADD CONSTRAINT "FK_MOVIE_TO_MREVIEW_1" FOREIGN KEY ("MCODE")
+	  REFERENCES "MOVIE" ("MCODE") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table OVO
+--------------------------------------------------------
+
+  ALTER TABLE "OVO" ADD CONSTRAINT "FK_USER_TO_OVO_1" FOREIGN KEY ("USER_ID")
+	  REFERENCES "MEMBER" ("USER_ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PAYMENT
+--------------------------------------------------------
+
+  ALTER TABLE "PAYMENT" ADD CONSTRAINT "FK_BASKET_TO_PAYMENT_1" FOREIGN KEY ("BSCODE")
+	  REFERENCES "BASKET" ("BSCODE") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PREVIEW
+--------------------------------------------------------
+
+  ALTER TABLE "PREVIEW" ADD CONSTRAINT "FK_MOVIE_TO_PREVIEW_1" FOREIGN KEY ("MCODE")
+	  REFERENCES "MOVIE" ("MCODE") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SERVICE
+--------------------------------------------------------
+
+  ALTER TABLE "SERVICE" ADD CONSTRAINT "FK_USER_TO_SERVICE_1" FOREIGN KEY ("USER_ID")
+	  REFERENCES "MEMBER" ("USER_ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SKBASKET
+--------------------------------------------------------
+
+  ALTER TABLE "SKBASKET" ADD CONSTRAINT "FK_MEMBER_TO_SKBASKET" FOREIGN KEY ("USER_ID")
+	  REFERENCES "MEMBER" ("USER_ID") ENABLE;
+  ALTER TABLE "SKBASKET" ADD CONSTRAINT "FK_SNACK_TO_SKBASKET_1" FOREIGN KEY ("SKCODE")
+	  REFERENCES "SNACK" ("SKCODE") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SNACK
+--------------------------------------------------------
+
+  ALTER TABLE "SNACK" ADD CONSTRAINT "FK_CINEMA_TO_SNACK_1" FOREIGN KEY ("CCODE")
+	  REFERENCES "CINEMA" ("CCODE") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table TICKET
+--------------------------------------------------------
+
+  ALTER TABLE "TICKET" ADD CONSTRAINT "FK_CINEMA_TO_TICKET_1" FOREIGN KEY ("CCODE")
+	  REFERENCES "CINEMA" ("CCODE") ENABLE;
+  ALTER TABLE "TICKET" ADD CONSTRAINT "FK_MOVIE_TO_TICKET_1" FOREIGN KEY ("MCODE")
+	  REFERENCES "MOVIE" ("MCODE") ENABLE;
+  ALTER TABLE "TICKET" ADD CONSTRAINT "FK_USER_TO_TICKET_1" FOREIGN KEY ("USER_ID")
+	  REFERENCES "MEMBER" ("USER_ID") ENABLE;

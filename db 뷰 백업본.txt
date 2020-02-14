@@ -1,0 +1,199 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 화요일-11월-12-2019   
+--------------------------------------------------------
+DROP VIEW "BOREORT";
+DROP VIEW "MCOUNTER";
+DROP VIEW "MERVLIST";
+DROP VIEW "MLIST";
+DROP VIEW "MRVLIST";
+DROP VIEW "MTABLE";
+DROP VIEW "NORELEASELIST";
+DROP VIEW "OVOLIST";
+DROP VIEW "PDLIST";
+DROP VIEW "PTLIST";
+DROP VIEW "QNALIST";
+DROP VIEW "RELIST";
+DROP VIEW "REPLYSEL";
+DROP VIEW "RPREORT";
+DROP VIEW "SERLIST";
+DROP VIEW "TICKETSEL";
+--------------------------------------------------------
+--  DDL for View BOREORT
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "BOREORT" ("RWRITER", "RNUM", "USER_ID") AS 
+  SELECT RWRITER, RNUM, USER_ID
+FROM MREVIEW M JOIN REPORT R ON(M.RNUM=R.BNUM) WHERE R.CATE = 'board'
+;
+--------------------------------------------------------
+--  DDL for View MCOUNTER
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "MCOUNTER" ("MTITLE", "MCODE", "COUNTER") AS 
+  SELECT M.MTITLE, T.MCODE, COUNT(*) AS COUNTER 
+FROM TICKET T JOIN MOVIE M ON T.MCODE = M.MCODE 
+GROUP BY M.MTITLE, T.MCODE ORDER BY 3 DESC
+;
+--------------------------------------------------------
+--  DDL for View MERVLIST
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "MERVLIST" ("RWRITER", "RNUM", "MTITLE", "RTITLE", "RRATE", "MRVDATE") AS 
+  SELECT MR.RWRITER, MR.RNUM, M.MTITLE, MR.RTITLE, MR.RRATE, MR.MRVDATE
+FROM MREVIEW MR JOIN MOVIE M ON(MR.MCODE = M.MCODE)
+ORDER BY RNUM
+;
+--------------------------------------------------------
+--  DDL for View MLIST
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "MLIST" ("RNUM", "USER_ID", "MVP", "PUNISH") AS 
+  SELECT ROWNUM AS RNUM, User_Id, MVP, PUNISH
+FROM MEMBER
+ORDER BY User_Id
+;
+--------------------------------------------------------
+--  DDL for View MRVLIST
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "MRVLIST" ("RONUM", "RNUM", "MTITLE", "RTITLE", "RRATE", "MRVDATE") AS 
+  SELECT ROWNUM AS RONUM, MR.RNUM,M.MTITLE, MR.RTITLE, MR.RRATE, MR.MRVDATE
+FROM MREVIEW MR JOIN MOVIE M ON(MR.MCODE = M.MCODE)
+ORDER BY RNUM
+;
+--------------------------------------------------------
+--  DDL for View MTABLE
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "MTABLE" ("MBCODE", "MCODE", "MTITLE", "MDIRECTOR", "MACTOR", "CATEGORY", "RELEASE", "STATUS", "AGECUT", "RATE") AS 
+  select "MBCODE","MCODE","MTITLE","MDIRECTOR","MACTOR","CATEGORY","RELEASE","STATUS","AGECUT","RATE" 
+from(select rownum mbcode,a.*
+    from(select mcode,mtitle,mdirector,mactor,m.category,m.release,m.status,m.agecut,avg(rrate) rate 
+         from movie m left join mreview using(mcode) 
+         group by mcode,mtitle,mdirector,mactor,m.category,m.release,m.status,m.agecut 
+         having m.category='now_playing_movie' and m.status = 'N' order by 1 desc) a)
+;
+--------------------------------------------------------
+--  DDL for View NORELEASELIST
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "NORELEASELIST" ("MBCODE", "MCODE", "MTITLE", "MDIRECTOR", "MACTOR", "CATEGORY", "RELEASE", "STATUS", "AGECUT", "AVG(RRATE)") AS 
+  select "MBCODE","MCODE","MTITLE","MDIRECTOR","MACTOR","CATEGORY","RELEASE","STATUS","AGECUT","AVG(RRATE)"
+from(select rownum mbcode,a.* 
+     from(select mcode,mtitle,mdirector,mactor,m.category,m.release,m.status,m.agecut,avg(rrate) 
+          from movie m left join mreview using(mcode) 
+          group by mcode,mtitle,mdirector,mactor,m.category,m.release,m.status,m.agecut 
+          having m.category='intended_movie' and m.status = 'N' order by 1 desc) a)
+;
+--------------------------------------------------------
+--  DDL for View OVOLIST
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "OVOLIST" ("RONUM", "ONUM", "OTITLE", "ODATE", "STATUS") AS 
+  SELECT ROWNUM AS RONUM, ONUM, OTITLE, ODATE, STATUS
+FROM OVO
+ORDER BY RONUM
+;
+--------------------------------------------------------
+--  DDL for View PDLIST
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "PDLIST" ("RNUM", "PAYDAY", "USER_ID", "MONEY", "STATUS") AS 
+  SELECT ROWNUM AS RNUM, P.PAYDAY, B.USER_ID, P.MONEY, P.STATUS
+FROM PAYMENT P JOIN BASKET B ON(P.BSCODE = B.BSCODE) ORDER BY RNUM
+;
+--------------------------------------------------------
+--  DDL for View PTLIST
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "PTLIST" ("RNUM", "PCODE", "MONEY", "PAYDAY", "STATUS") AS 
+  SELECT ROWNUM AS RNUM, PCODE, MONEY, PAYDAY, STATUS
+FROM PAYMENT ORDER BY RNUM
+;
+--------------------------------------------------------
+--  DDL for View QNALIST
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "QNALIST" ("RONUM", "SNUM", "USER_ID", "STITLE", "SDATE") AS 
+  SELECT ROWNUM AS RONUM, SNUM, USER_ID, STITLE, SDATE 
+FROM SERVICE ORDER BY 1 DESC
+;
+--------------------------------------------------------
+--  DDL for View RELIST
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "RELIST" ("RONUM", "RWRITER", "RCONTENT", "MODIFY_DATE") AS 
+  SELECT ROWNUM AS RONUM, RWRITER, RCONTENT, MODIFY_DATE
+FROM REPLY ORDER BY RONUM
+;
+--------------------------------------------------------
+--  DDL for View REPLYSEL
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "REPLYSEL" ("RNUM", "RTITLE", "RCONTENT", "RWRITER", "MODIFY_DATE") AS 
+  SELECT R.RNUM, R.RTITLE, RP.RCONTENT,RP.RWRITER, RP.MODIFY_DATE
+FROM REPLY RP JOIN MREVIEW R ON(RP.RNUM = R.RNUM)
+;
+--------------------------------------------------------
+--  DDL for View RPREORT
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "RPREORT" ("RWRITER", "RID", "USER_ID") AS 
+  SELECT M.RWRITER, M.RID, R.USER_ID
+FROM REPLY M JOIN REPORT R ON(M.RID=R.BNUM) WHERE R.CATE = 'reply'
+;
+--------------------------------------------------------
+--  DDL for View SERLIST
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "SERLIST" ("RNUM", "SNUM", "STITLE", "SDATE", "STATUS") AS 
+  SELECT ROWNUM AS RNUM, SNUM, STITLE, SDATE, STATUS
+FROM SERVICE
+ORDER BY SNUM
+;
+--------------------------------------------------------
+--  DDL for View TICKETSEL
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE VIEW "TICKETSEL" ("TNUM", "MTITLE", "USER_ID", "CCODE", "PRICE", "SEAT") AS 
+  SELECT T.TNUM, M.MTITLE, T.USER_ID, T.CCODE, T.PRICE, T.SEAT
+FROM TICKET T JOIN MOVIE M ON(T.MCODE = M.MCODE)
+;
+REM INSERTING into BOREORT
+SET DEFINE OFF;
+REM INSERTING into MCOUNTER
+SET DEFINE OFF;
+REM INSERTING into MERVLIST
+SET DEFINE OFF;
+REM INSERTING into MLIST
+SET DEFINE OFF;
+Insert into MLIST (RNUM,USER_ID,MVP,PUNISH) values (1,'aaaa','C',null);
+Insert into MLIST (RNUM,USER_ID,MVP,PUNISH) values (2,'admin','C',null);
+Insert into MLIST (RNUM,USER_ID,MVP,PUNISH) values (3,'test','C',null);
+REM INSERTING into MRVLIST
+SET DEFINE OFF;
+REM INSERTING into MTABLE
+SET DEFINE OFF;
+Insert into MTABLE (MBCODE,MCODE,MTITLE,MDIRECTOR,MACTOR,CATEGORY,RELEASE,STATUS,AGECUT,RATE) values (1,'87','터미네이터 다크 페이트','팀 밀러','맥켄지 데이비스','now_playing_movie',to_date('19/10/29','RR/MM/DD'),'N','15s',null);
+REM INSERTING into NORELEASELIST
+SET DEFINE OFF;
+REM INSERTING into OVOLIST
+SET DEFINE OFF;
+REM INSERTING into PDLIST
+SET DEFINE OFF;
+REM INSERTING into PTLIST
+SET DEFINE OFF;
+REM INSERTING into QNALIST
+SET DEFINE OFF;
+Insert into QNALIST (RONUM,SNUM,USER_ID,STITLE,SDATE) values (1,'1','admin','하하',to_date('19/11/11','RR/MM/DD'));
+REM INSERTING into RELIST
+SET DEFINE OFF;
+REM INSERTING into REPLYSEL
+SET DEFINE OFF;
+REM INSERTING into RPREORT
+SET DEFINE OFF;
+REM INSERTING into SERLIST
+SET DEFINE OFF;
+Insert into SERLIST (RNUM,SNUM,STITLE,SDATE,STATUS) values (1,'1','하하',to_date('19/11/11','RR/MM/DD'),'N');
+REM INSERTING into TICKETSEL
+SET DEFINE OFF;
