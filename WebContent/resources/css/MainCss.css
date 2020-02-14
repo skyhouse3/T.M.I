@@ -1,0 +1,69 @@
+    p { margin:20px 0px; }
+
+    .nav li ul{
+        display: none;
+    }
+
+body { margin: 0; }
+.zeta-menu-bar {
+  /* background: hotpink; */
+  display: inline-block;
+  width: 100%;
+
+}
+.zeta-menu-bar .zeta-menu{
+    float:right;
+    /* position: fixed; */
+   
+}
+.zeta-menu { margin: 0; padding: 0; }
+.zeta-menu li {
+  float: left;
+  list-style:none;
+  position: relative;
+}
+.zeta-menu li:hover { background: none; }
+.zeta-menu li:hover>a { color: none; }
+.zeta-menu a {
+  color: black;
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  
+  
+}
+.zeta-menu ul {
+  background: none;
+  border: 1px solid none;
+  display: none;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 180px;
+}
+.zeta-menu ul li { float: none; }
+.zeta-menu ul li:hover { background: none; }
+.zeta-menu ul li:hover a { color: none; }
+.zeta-menu ul a { color: none; }
+.zeta-menu ul ul { left: 100%; top: 0; }
+.zeta-menu ul ul li {float:left; margin-right:10px;}
+
+#mSelect{
+  margin-left: auto;
+  margin-bottom: 100px;
+}
+
+/* .content-wrap .header-stick { margin-top: -80px !important; }
+
+.content-wrap .footer-stick { margin-bottom: -80px !important; } */
+
+.content-wrap {
+  position: relative;
+  padding: 80px 0;
+}
+    
+
+    
+
+    
